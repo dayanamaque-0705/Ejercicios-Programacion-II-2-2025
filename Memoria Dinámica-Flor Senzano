@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+
+void imprimirFila(int n, int contador = 1) {
+    if (contador > n) return; 
+    cout << contador;         
+    imprimirFila(n, contador + 1); 
+}
+
+
+void imprimirFilaInvertida(int n) {
+    if (n == 0) return;       
+    cout << n;                
+    imprimirFilaInvertida(n - 1); 
+}
+
+int main() {
+    int size = 3; 
+
+    cout << "Piramide normal:" << endl;
+    
+    for (int i = size; i >= 1; i--) {
+        imprimirFila(i);
+        cout << endl;
+    }
+    for (int i = 2; i <= size; i++) {
+        imprimirFila(i);
+        cout << endl;
+    }
+
+    cout << "\nPiramide invertida (volteada):" << endl;
+    for (int i = size; i >= 1; i--) {
+        imprimirFilaInvertida(i);
+        cout << endl;
+    }
+    for (int i = 2; i <= size; i++) {
+        imprimirFilaInvertida(i);
+        cout << endl;
+    }
+
+    return 0;
+}
