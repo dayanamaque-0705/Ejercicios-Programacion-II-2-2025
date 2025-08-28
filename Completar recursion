@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+
+void imprimirColumnasMatrix(int** matrix, int i, int j, int contadorColumnas) {
+    if (j >= contadorColumnas) {
+        return;
+    }
+    *(*(matrix + i) + j) = j + 1;
+    cout << *(*(matrix + i) + j) << " ";
+    imprimirColumnasMatrix(matrix, i, j + 1, contadorColumnas);
+}
+
+void imprimirMatrix(int** matrix, int i, int rows, int cols, int mitad, int contadorColumnas, string contadorEspacios) { 
+    if (i >= rows) {
+        return;
+    }
+
+    if (i >= (mitad - 1)) {
+        contadorColumnas++;
+        if (!contadorEspacios.empty()) {
+            contadorEspacios.pop_back();
+            contadorEspacios.pop_back();
+        }
+    }
+    else {
+        contadorColumnas--;
+        contadorEspacios += "  ";
+    }
+
+    imprimirMatrix(matrix, i + 1, rows, cols, mitad, contadorColumnas, contadorEspacios);
+}
+
+int main() {
+    int size = 15;
+    int** matrix = new int* [size];
+    for (int i = 0; i < size; i++) {
+        *(matrix + i) = new int[size];
+    }
+    int rows = size; 
+    int cols = size; 
+
+    
+    cout << " Imprimir recursión" << endl;
+    int mitad = (size + 1) / 2;
+    int contadorColumnas = mitad;
+    string contadorEspacios = string((mitad - 1) * 2, ' ');
+    imprimirMatrix(matrix, 0, rows, cols, mitad, contadorColumnas, contadorEspacios);
+
+    // Liberar memoria
+    for (int i = 0; i < size; i++) {
+        delete[] * (matrix + i);
+    }
+    delete[]; 
+
+    return 0;
+}
