@@ -1,0 +1,81 @@
+#include <iostream>
+
+using namespace std;
+
+// Imprime la matriz de forma recursiva.
+void imprimirMatrizRecursivamente(int** matriz, int filas, int columnas, int filaActual = 0, int columnaActual = 0) {
+    // Caso base: si ya no hay filas que imprimir, termina la funcion.
+    if (filaActual == filas) {
+        return;
+    }
+
+    // Imprime el elemento actual usando punteros.
+    cout << *(*(matriz + filaActual) + columnaActual) << " ";
+
+    // Determina cual sera el siguiente elemento a imprimir.
+    int proximaColumna = columnaActual + 1;
+    int proximaFila = filaActual;
+
+    // Si la proxima columna se sale de los limites, pasamos a la siguiente fila.
+    if (proximaColumna == columnas) {
+        proximaColumna = 0;
+        proximaFila++;
+        cout << endl; // Salto de linea al final de cada fila.
+    }
+
+    // Llamada recursiva para imprimir el siguiente elemento.
+    imprimirMatrizRecursivamente(matriz, filas, columnas, proximaFila, proximaColumna);
+}
+
+// Crea una matriz 2D de forma eficiente en un solo bloque de memoria.
+int** crearMatrizEficiente(int filas, int columnas) {
+    int** matriz = new int*[filas];
+    int* bloqueDeMemoria = new int[filas * columnas];
+    for (int i = 0; i < filas; ++i) {
+        *(matriz + i) = bloqueDeMemoria + (i * columnas);
+    }
+    return matriz;
+}
+
+// Libera la memoria de una matriz creada de forma eficiente.
+void liberarMemoriaMatriz(int** matriz) {
+    delete[] *matriz;
+    delete[] matriz;
+}
+
+int main() {
+    const int TAMANO = 10;
+
+    // 1. CREACION (Consumo de recursos reducido)
+    int** miMatriz = crearMatrizEficiente(TAMANO, TAMANO);
+
+    // 2. ASIGNACION (Aumentar contador)
+    int contador = 1;
+    for (int i = 0; i < TAMANO; ++i) {
+        for (int j = 0; j < TAMANO; ++j) {
+            *(*(miMatriz + i) + j) = contador++;
+        }
+    }
+
+    cout << "--- Matriz Original ---" << endl;
+    // 3. IMPRESION (Utilizando recursividad)
+    imprimirMatrizRecursivamente(miMatriz, TAMANO, TAMANO);
+
+    // 4. VOLTEAR MATRIZ
+    for (int i = 0; i < TAMANO; ++i) {
+        for (int j = 0; j < TAMANO / 2; ++j) {
+            int temp = *(*(miMatriz + i) + j);
+            *(*(miMatriz + i) + j) = *(*(miMatriz + i) + (TAMANO - 1 - j));
+            *(*(miMatriz + i) + (TAMANO - 1 - j)) = temp;
+        }
+    }
+    
+    cout << "\n--- Matriz Volteada Horizontalmente ---" << endl;
+    imprimirMatrizRecursivamente(miMatriz, TAMANO, TAMANO);
+
+    // 5. LIBERAR MEMORIA
+    liberarMemoriaMatriz(miMatriz);
+    miMatriz = nullptr;
+
+    return 0;
+}
