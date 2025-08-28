@@ -4,11 +4,11 @@ using namespace std;
 
 int main() {
     int N;
-    cout << "Ingrese un número impar N: ";
+    cout << "Ingrese un numero impar N: ";
     cin >> N;
 
     if (N % 2 == 0 || N < 1) {
-        cout << "N debe ser un número impar positivo." << endl;
+        cout << "N debe ser un numero impar positivo." << endl;
         return 1;
     }
 
@@ -50,3 +50,4 @@ int main() {
 
     return 0;
 }
+
