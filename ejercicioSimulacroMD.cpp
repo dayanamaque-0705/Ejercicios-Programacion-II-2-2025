@@ -49,7 +49,8 @@ void ejercicioMatrizVertical(int** matrix, int cols, int rows, int size)
         for (int j = 0; j < cols; j++)
         {
             if (j < contadorMitadRows) {
-                *(*(matrix + i) + j) = 1;
+                //Añadí ahora a las 07:57 28-08-2025 el j + 1 en lugar de 1 porque se me olvidó por completo el contador, pensé que el contador era de tiempo :c
+                *(*(matrix + i) + j) = j + 1;
 
             }
         }
@@ -75,6 +76,7 @@ void ejercicioMatrizHorizontal(int** matrix, int cols, int rows, int size)
         for (int j = 0; j < cols; j++)
         {
             if (j < contadorMitadRows) {
+                //Añadí ahora a las 07:57 28-08-2025 el j + 1 en lugar de 1 porque se me olvidó por completo el contador, pensé que el contador era de tiempo :c
                 *(*(matrix + j) + i) = 1;
 
             }
@@ -97,7 +99,7 @@ void ejercicioMatrizRecursiva(int** matrix, int cols, int rows, int size, int i,
     if (i >= rows) {
         return;
     }
-
+    //Este no tomé en cuenta que habia que añadir un contador y por eso trabajé con ceros y unos, mil disculpas :c, aunque tiene recursividad 
     int uno;
     int ceros;
 
