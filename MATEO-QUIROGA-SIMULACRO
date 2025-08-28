@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+void invertirFilaRec(int* fila, int l, int r) 
+{
+    if (l >= r) return; //Caso base
+    std::swap(fila[l], fila[r]);      
+    invertirFilaRec(fila, l + 1, r - 1);
+}
+
+
+void imprimir(int** matrix, int rows, int cols) 
+{
+    for (int i = 0; i < rows; ++i) 
+    {
+        for (int j = 0; j < cols; ++j)
+        {
+            cout << matrix[i][j] << ' ';
+        }
+        cout << '\n';
+    }
+}
+
+int main() 
+{
+    const int rows = 15;
+    const int cols = 15;
+
+    int** matrix = new int* [rows];
+    int* data = new int[rows * cols]; 
+
+    for (int i = 0; i < rows; ++i) 
+    {
+        matrix[i] = data + i * cols; 
+    }
+
+ 
+    int contador = 0; 
+    for (int i = 0; i < rows; ++i) 
+    {
+        for (int j = 0; j < cols; ++j) 
+        {
+            matrix[i][j] = contador++; 
+        }
+    }
+
+    cout << "Matriz original:\n";
+    imprimir(matrix, rows, cols);
+
+
+    for (int i = 0; i < rows; ++i)
+    {
+        invertirFilaRec(matrix[i], 0, cols - 1);
+    }
+
+    cout << "Matriz volteada horizontalmente:\n";
+    imprimir(matrix, rows, cols);
+
+   
+    delete[] data;   
+    delete[] matrix; 
+
+    return 0;
+}
