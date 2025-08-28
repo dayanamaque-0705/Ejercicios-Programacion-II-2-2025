@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+void imprimirColumnas(int** matrix, int i, int j, int cols)
+{
+    if (j < 0) // Caso base
+    {
+        return;
+    }
+    imprimirColumnas(matrix, i, j - 1, cols);
+
+    if (*(*(matrix + i) + j) != 0) {
+        cout << *(*(matrix + i) + j) << " ";
+    }
+    else {
+        cout << "  ";
+    }
+}
+
+void imprimirMatrix(int** matrix, int i, int j, int rows, int cols)
+{
+    if (i >= rows)
+    {
+        return;
+    }
+
+    imprimirColumnas(matrix, i, cols - 1, cols);
+    cout << endl;
+
+    imprimirMatrix(matrix, i + 1, j, rows, cols);
+}
+
+int main()
+{
+    int size = 5;
+    int** matrix = new int* [size];
+
+    // CREACIÓN
+    for (int i = 0; i < size; i++) {
+        *(matrix + i) = new int[size]();
+    }
+
+    //--------------- EJERCICIO 1 MODIFICADO ---------------
+    int mitad = (size + 1) / 2;
+    int contador = 1; // Contador para los valores
+
+    for (int i = 0; i < size; i++)
+    {
+        int columnas_a_llenar;
+        if (i < mitad) {
+            columnas_a_llenar = mitad - i;
+        }
+        else {
+            columnas_a_llenar = i - mitad + 2;
+        }
+
+        for (int j = 0; j < columnas_a_llenar; j++) {
+            *(*(matrix + i) + (size - 1 - j)) = columnas_a_llenar - j;
+        }
+        contador += columnas_a_llenar;
+    }
+
+    imprimirMatrix(matrix, 0, 0, size, size);
+
+    // LIBERAR MEMORIA
+    for (int i = 0; i < size; i++) {
+        delete[] * (matrix + i);
+    }
+    delete[] matrix;
+
+    return 0;
+}
