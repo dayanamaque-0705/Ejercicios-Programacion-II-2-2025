@@ -1,0 +1,69 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Acceso indexado sobre bloque contiguo
+inline int& at(int* m, int n, int i, int j) {
+    return *(m + i * n + j);
+}
+
+// 1) Llenado secuencial y conteo de asignaciones
+void fillSequential(int* m, int n, long long& contador) {
+    int val = 1;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            at(m, n, i, j) = val++;
+            ++contador; // cuenta asignaciones
+        }
+    }
+}
+
+// 3) Voltear horizontalmente (invertir columnas) y contar swaps
+void flipHorizontal(int* m, int n, long long& contador) {
+    for (int i = 0; i < n; ++i) {
+        for (int l = 0, r = n - 1; l < r; ++l, --r) {
+            std::swap(at(m, n, i, l), at(m, n, i, r));
+            ++contador; // cuenta swaps
+        }
+    }
+}
+
+// 4) Impresión RECURSIVA (recorre por filas y columnas)
+void printRecursive(const int* m, int n, int i = 0, int j = 0) {
+    if (i == n) return;                 // caso base: no hay más filas
+    cout << setw(4) << *(m + i * n + j);
+    if (j + 1 == n) {                   // fin de fila → salto de línea y pasar a la sig. fila
+        cout << '\n';
+        printRecursive(m, n, i + 1, 0); // pasa a próxima fila
+    } else {
+        printRecursive(m, n, i, j + 1); // avanza en columnas
+    }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int size = 15;              // puedes cambiar el tamaño
+    long long contador = 0;     // 1) contador global de operaciones
+
+    // 2) Reserva ÚNICA (reduce fragmentación y llamadas a new/delete)
+    int* matrix = new int[size * size];
+
+    // Llenar y mostrar
+    fillSequential(matrix, size, contador);
+    cout << "Matriz original:\n";
+    printRecursive(matrix, size);
+
+    // 3) Voltear horizontalmente
+    flipHorizontal(matrix, size, contador);
+    cout << "\nMatriz volteada horizontalmente:\n";
+    printRecursive(matrix, size);
+
+    // Mostrar contador total
+    cout << "\nOperaciones contabilizadas (asignaciones + swaps): " << contador << "\n";
+
+    // Liberar memoria
+    delete[] matrix;
+    return 0;
+}
