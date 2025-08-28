@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+void reservarMatrix(int** matrix, int fila, int size) {
+    if (fila >= size) return;
+    matrix[fila] = new int[size];
+    reservarMatrix(matrix, fila + 1, size);
+}
+
+void imprimirColumnasMatrix(int** matrix, int i, int j, int contadorColumnas) {
+    if (j >= contadorColumnas) return;
+
+    *(*(matrix + i) + j) = j + 1;
+    cout << *(*(matrix + i) + j) << " ";
+
+    imprimirColumnasMatrix(matrix, i, j + 1, contadorColumnas);
+}
+
+void imprimirMatrix(int** matrix, int i, int rows, int cols, int mitad, int contadorColumnas, string contadorEspacios) {
+    if (i >= rows) return;
+
+    cout << contadorEspacios;
+    imprimirColumnasMatrix(matrix, i, 0, contadorColumnas);
+    cout << endl;
+
+    if (i >= (mitad - 1)) {
+        contadorColumnas++;
+        if (!contadorEspacios.empty()) {
+            contadorEspacios.pop_back();
+            contadorEspacios.pop_back();
+        }
+    } else {
+        contadorColumnas--;
+        contadorEspacios += "  ";
+    }
+
+    imprimirMatrix(matrix, i + 1, rows, cols, mitad, contadorColumnas, contadorEspacios);
+}
+
+// Liberar memoria recursivamente
+void liberarMatrix(int** matrix, int fila, int size) {
+    if (fila >= size) return;
+    delete[] matrix[fila];
+    liberarMatrix(matrix, fila + 1, size);
+}
+
+int main() {
+    int size = 15;
+    int** matrix = new int*[size];
+
+    // Reservar con recursión
+    reservarMatrix(matrix, 0, size);
+
+    cout << " ----------------- Imprimir con recursión" << endl;
+    int mitad = (size + 1) / 2;
+    int contadorColumnas = mitad;
+    string contadorEspacios = "";
+
+    // Imprimir con recursión
+    imprimirMatrix(matrix, 0, size, size, mitad, contadorColumnas, contadorEspacios);
+
+    // Liberar con recursión
+    liberarMatrix(matrix, 0, size);
+    delete[] matrix;
+
+    return 0;
+}
