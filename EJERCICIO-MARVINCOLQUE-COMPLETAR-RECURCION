@@ -1,0 +1,104 @@
+#include <iostream>
+using namespace std;
+
+void imprimirFila(int* fila, int count) {
+    if (count == 0) return;
+    cout << *fila << " ";  
+    imprimirFila(fila + 1, count - 1);
+}
+
+void imprimirMatriz(int** matrix, int size, int mitad, int fila = 0) {
+    if (fila == size) return;
+
+    int count;
+    if (fila < mitad) {
+        count = mitad - fila;  
+    }
+    else {
+        count = fila - mitad + 2;  
+    }
+
+    imprimirFila(*(matrix + fila), count); 
+    cout << endl;
+
+    imprimirMatriz(matrix, size, mitad, fila + 1);
+}
+
+int main() {
+    int size = 5;
+    int mitad = (size + 1) / 2;
+
+    int** matrix = new int* [size];
+
+    for (int i = 0; i < size; i++) {
+        int count;
+        if (i < mitad) {
+            count = mitad - i;
+        }
+        else {
+            count = i - mitad + 2;
+        }
+
+        matrix[i] = new int[count];
+        
+        for (int j = 0; j < count; j++) {
+            *(*(matrix + i) + j) = j + 1;
+        }
+    }
+
+    imprimirMatriz(matrix, size, mitad);
+    /*
+    int** matrix = new int* [size];
+
+    for (int i = 0; i < size; i++) {
+        int count;
+        if (i < mitad) {
+            count = mitad - i;
+        }
+        else {
+            count = i - mitad + 2;
+        }
+
+        *(matrix + i) = new int[count];
+    }
+
+    for (int i = 0; i < size; i++) {
+        int count;
+        if (i < mitad) {
+            count = mitad - i;
+        }
+        else {
+            count = i - mitad + 2;
+        }
+
+        for (int j = 0; j < count; j++) {
+            *(*(matrix + i) + j) = count - j;
+        }
+    }
+
+    for (int i = 0; i < size; i++) {
+        int count;
+        if (i < mitad) {
+            count = mitad - i;
+        }
+        else {
+            count = i - mitad + 2;
+        }
+
+        for (int s = 0; s < (mitad - count); s++) 
+        cout << "  ";
+
+        for (int j = 0; j < count; j++) {
+            cout << *(*(matrix + i) + j) << " ";
+        }
+        cout << endl;
+    }
+    */
+
+    for (int i = 0; i < size; i++) {
+        delete[] matrix[i];
+    }
+    delete[] matrix;
+
+    return 0;
+}
