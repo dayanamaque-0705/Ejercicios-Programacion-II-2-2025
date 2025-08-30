@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int size = 5;
+
+    int** matrix = new int* [size];
+
+    int rows = size;
+    int cols = size;
+
+    int N = size;
+    int M = size - 2;
+
+    for (int i = 0; i < rows; i++) {
+        *(matrix + i) = new int[N];
+
+        for (int j = 0; j < cols; j++) {
+            // Se mantiene tu condición original para dejar los espacios en blanco
+            if (i < M || j < M) {
+                // --- ÚNICO CAMBIO: INICIA ---
+                // En lugar de asignar 1, asignamos el valor del patrón.
+                // El valor es el mínimo entre (fila+1) y (columna+1).
+                if (i < j) {
+                    *(*(matrix + i) + j) = i + 1;
+                }
+                else {
+                    *(*(matrix + i) + j) = j + 1;
+                }
+                // --- ÚNICO CAMBIO: TERMINA ---
+            }
+        }
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (i < M || j < M) {
+                cout << *(*(matrix + i) + j) << " ";
+            }
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < size; i++) {
+        delete[] * (matrix + i);
+    }
+    delete[] matrix;
+
+    return 0;
+}
