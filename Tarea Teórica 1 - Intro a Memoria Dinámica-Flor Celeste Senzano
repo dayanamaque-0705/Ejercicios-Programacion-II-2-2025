@@ -1,0 +1,73 @@
+Memoria estática
+
+Es la memoria que se reserva en tiempo de compilación.
+
+El tamaño de las variables (enteros, arrays, estructuras, etc.) ya está definido antes de ejecutar el programa.
+
+Se libera de manera automática al terminar la ejecución del programa o al salir del bloque donde fue declarada.
+
+Memoria dinámica
+
+Es la memoria que se reserva en tiempo de ejecución (mientras el programa corre).
+
+Se puede decidir el tamaño cuando el programa ya está funcionando.
+
+El programador debe liberarla manualmente usando delete o delete[].
+
+//////Forma de recorrer un array con punteros (Ejemplo en código)
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n = 5;
+    int* arr = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        *(arr + i) = i + 1; 
+    }
+
+    cout << "Array con punteros: ";
+    for (int i = 0; i < n; i++) {
+        cout << *(arr + i) << " "; // *(arr+i) es arr[i]
+    }
+    cout << endl;
+
+    delete[] arr; 
+    return 0;
+}
+/////Forma de recorrer una matriz con punteros (Ejemplo en código) + Plus
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int filas = 3, cols = 3;
+
+    int** matriz = new int*[filas];
+    for (int i = 0; i < filas; i++) {
+        matriz[i] = new int[cols];
+    }
+
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < cols; j++) {
+            *(*(matriz + i) + j) = (i + 1) * (j + 1); 
+          
+        }
+    }
+
+    cout << "Matriz con punteros:" << endl;
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << *(*(matriz + i) + j) << " ";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < filas; i++) {
+        delete[] matriz[i];
+    }
+    delete[] matriz;
+
+    return 0;
+}
