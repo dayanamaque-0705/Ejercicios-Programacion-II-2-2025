@@ -1,0 +1,497 @@
+// menu_memoriadianamica.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+#include <iostream>
+using namespace std;
+
+
+void ejercicio1() {
+    int* p = new int;
+    cout << "Ingrese un numero: ";
+    cin >> *p;
+    cout << "Valor: " << *p << "\n";
+    delete p;
+}
+
+void ejercicio2() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+    for (int i = 0; i < n; i++) {
+        arr[i] = i + 1;
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+    delete[] arr;
+}
+
+void ejercicio3() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+    int s = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        s = s + arr[i];
+    }
+    cout << "Suma: " << s << "\n";
+    delete[] arr;
+}
+
+void ejercicio4() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int max = arr[0];
+    int min = arr[0];
+
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+
+    cout << "Max: " << max << " Min: " << min << "\n";
+    delete[] arr;
+}
+
+void ejercicio5() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+    float prom = 0;
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        prom = prom + arr[i];
+    }
+
+    cout << "Promedio: " << prom / n << "\n";
+    delete[] arr;
+}
+
+void ejercicio6() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+    int c = 0;
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        if (arr[i] % 2 == 0) {
+            c = c + 1;
+        }
+    }
+
+    cout << "Cantidad pares: " << c << "\n";
+    delete[] arr;
+}
+
+void ejercicio7() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+        arr[i] = arr[i] * 2;
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+    delete[] arr;
+}
+
+void ejercicio8() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    for (int i = n - 1; i >= 0; i--) {
+        cout << arr[i] << " ";
+    }
+    cout << "\n";
+    delete[] arr;
+}
+
+void ejercicio9() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* arr = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int x;
+    cout << "Valor a buscar: ";
+    cin >> x;
+
+    int pos = -1;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == x) {
+            pos = i;
+            break;
+        }
+    }
+
+    if (pos == -1) {
+        cout << "No encontrado\n";
+    }
+    else {
+        cout << "Encontrado en posicion " << pos << "\n";
+    }
+
+    delete[] arr;
+}
+
+void ejercicio10() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int* a = new int[n];
+    int* b = new int[n];
+    int* c = new int[n];
+
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        cin >> b[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        c[i] = a[i] + b[i];
+        cout << c[i] << " ";
+    }
+    cout << "\n";
+
+    delete[] a;
+    delete[] b;
+    delete[] c;
+}
+
+void ejercicio11() {
+    int n, m;
+    cout << "Ingrese n y m: ";
+    cin >> n >> m;
+    int** mat = new int* [n];
+    int k = 1;
+
+    for (int i = 0; i < n; i++) {
+        mat[i] = new int[m];
+        for (int j = 0; j < m; j++) {
+            mat[i][j] = k;
+            k = k + 1;
+            cout << mat[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    for (int i = 0; i < n; i++) {
+        delete[] mat[i];
+    }
+    delete[] mat;
+}
+
+void ejercicio12() {
+    int n, m;
+    cout << "Ingrese n y m: ";
+    cin >> n >> m;
+    int** mat = new int* [n];
+
+    for (int i = 0; i < n; i++) {
+        mat[i] = new int[m];
+        int suma = 0;
+        for (int j = 0; j < m; j++) {
+            cin >> mat[i][j];
+            suma = suma + mat[i][j];
+        }
+        cout << "Suma fila " << i + 1 << ": " << suma << "\n";
+    }
+
+    for (int i = 0; i < n; i++) {
+        delete[] mat[i];
+    }
+    delete[] mat;
+}
+
+void ejercicio13() {
+    int n, m;
+    cout << "Ingrese n y m: ";
+    cin >> n >> m;
+    int** mat = new int* [n];
+
+    for (int i = 0; i < n; i++) {
+        mat[i] = new int[m];
+        for (int j = 0; j < m; j++) {
+            cin >> mat[i][j];
+        }
+    }
+
+    for (int j = 0; j < m; j++) {
+        int suma = 0;
+        for (int i = 0; i < n; i++) {
+            suma = suma + mat[i][j];
+        }
+        cout << "Suma col " << j + 1 << ": " << suma << "\n";
+    }
+
+    for (int i = 0; i < n; i++) {
+        delete[] mat[i];
+    }
+    delete[] mat;
+}
+
+void ejercicio14() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int** mat = new int* [n];
+    int suma = 0;
+
+    for (int i = 0; i < n; i++) {
+        mat[i] = new int[n];
+        for (int j = 0; j < n; j++) {
+            cin >> mat[i][j];
+            if (i == j) {
+                suma = suma + mat[i][j];
+            }
+        }
+    }
+
+    cout << "Suma diagonal principal: " << suma << "\n";
+
+    for (int i = 0; i < n; i++) {
+        delete[] mat[i];
+    }
+    delete[] mat;
+}
+
+void ejercicio15() {
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    int** mat = new int* [n];
+    int suma = 0;
+
+    for (int i = 0; i < n; i++) {
+        mat[i] = new int[n];
+        for (int j = 0; j < n; j++) {
+            cin >> mat[i][j];
+            if (i + j == n - 1) {
+                suma = suma + mat[i][j];
+            }
+        }
+    }
+
+    cout << "Suma diagonal secundaria: " << suma << "\n";
+
+    for (int i = 0; i < n; i++) {
+        delete[] mat[i];
+    }
+    delete[] mat;
+}
+
+void ejercicio16() {
+    int n, m;
+    cout << "Ingrese n y m: ";
+    cin >> n >> m;
+    int** a = new int* [n];
+    int** b = new int* [n];
+    int** c = new int* [n];
+
+    for (int i = 0; i < n; i++) {
+        a[i] = new int[m];
+        b[i] = new int[m];
+        c[i] = new int[m];
+    }
+
+    cout << "Matriz A:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> a[i][j];
+        }
+    }
+
+    cout << "Matriz B:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cin >> b[i][j];
+        }
+    }
+
+    cout << "Resultado:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            c[i][j] = a[i][j] + b[i][j];
+            cout << c[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    for (int i = 0; i < n; i++) {
+        delete[] a[i];
+        delete[] b[i];
+        delete[] c[i];
+    }
+    delete[] a;
+    delete[] b;
+    delete[] c;
+}
+
+void ejercicio17() {
+    int N;
+    cout << "Ingrese un numero impar N: ";
+    cin >> N;
+    int** arr = new int* [N];
+    int mitad = N / 2;
+
+    for (int i = 0; i < N; i++) {
+        int tam;
+        if (i <= mitad) {
+            tam = mitad - i + 1;
+        }
+        else {
+            tam = i - mitad + 1;
+        }
+        arr[i] = new int[tam];
+        for (int j = 0; j < tam; j++) {
+            arr[i][j] = j + 1;
+            cout << arr[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    for (int i = 0; i < N; i++) {
+        delete[] arr[i];
+    }
+    delete[] arr;
+}
+
+void ejercicio18() {
+    int N, M;
+    cout << "Ingrese N y M (N>M): ";
+    cin >> N >> M;
+    int** arr = new int* [N];
+    int* cols = new int[N];
+
+    for (int i = 0; i < N; i++) {
+        if (i < M) {
+            cols[i] = N;
+        }
+        else {
+            cols[i] = M;
+        }
+        arr[i] = new int[cols[i]];
+        for (int j = 0; j < cols[i]; j++) {
+            if (i < M) {
+                if (j < i) {
+                    arr[i][j] = j + 1;
+                }
+                else {
+                    arr[i][j] = i + 1;
+                }
+            }
+            else {
+                arr[i][j] = j + 1;
+            }
+            cout << arr[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    for (int i = 0; i < N; i++) {
+        delete[] arr[i];
+    }
+    delete[] arr;
+    delete[] cols;
+}
+
+
+int main() {
+    int opcion;
+
+    do {
+        cout << "\n==== MENU EJERCICIOS MEMORIA DINAMICA ====\n";
+        cout << "1. Entero dinamico\n";
+        cout << "2. Arreglo 1..n\n";
+        cout << "3. Suma de arreglo\n";
+        cout << "4. Maximo y minimo\n";
+        cout << "5. Promedio\n";
+        cout << "6. Cantidad de pares\n";
+        cout << "7. Duplicar arreglo\n";
+        cout << "8. Invertir arreglo\n";
+        cout << "9. Buscar valor\n";
+        cout << "10. Sumar dos arreglos\n";
+        cout << "11. Matriz consecutiva\n";
+        cout << "12. Suma por filas\n";
+        cout << "13. Suma por columnas\n";
+        cout << "14. Diagonal principal\n";
+        cout << "15. Diagonal secundaria\n";
+        cout << "16. Suma de matrices\n";
+        cout << "17. Estructura triangular\n";
+        cout << "18. Estructura N y M\n";
+        cout << "0. Salir\n";
+        cout << "Seleccione una opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+        case 1: { ejercicio1(); break; }
+        case 2: { ejercicio2(); break; }
+        case 3: { ejercicio3(); break; }
+        case 4: { ejercicio4(); break; }
+        case 5: { ejercicio5(); break; }
+        case 6: { ejercicio6(); break; }
+        case 7: { ejercicio7(); break; }
+        case 8: { ejercicio8(); break; }
+        case 9: { ejercicio9(); break; }
+        case 10: { ejercicio10(); break; }
+        case 11: { ejercicio11(); break; }
+        case 12: {  ejercicio12();  break; }
+        case 13: {  ejercicio13();  break; }
+        case 14: {  ejercicio14();  break; }
+        case 15: {  ejercicio15();  break; }
+        case 16: {  ejercicio16(); break; }
+        case 17: {  ejercicio17(); break; }
+        case 18: {  ejercicio18();  break; }
+        case 0: { cout << "Saliendo...\n"; break; }
+        default: { cout << "Opcion invalida\n"; break; }
+        }
+
+    } while (opcion != 0);
+
+    return 0;
+}
+
+
+// Ejecutar programa: Ctrl + F5 o menú Depurar > Iniciar sin depurar
+// Depurar programa: F5 o menú Depurar > Iniciar depuración
+
+// Sugerencias para primeros pasos: 1. Use la ventana del Explorador de soluciones para agregar y administrar archivos
+//   2. Use la ventana de Team Explorer para conectar con el control de código fuente
+//   3. Use la ventana de salida para ver la salida de compilación y otros mensajes
+//   4. Use la ventana Lista de errores para ver los errores
+//   5. Vaya a Proyecto > Agregar nuevo elemento para crear nuevos archivos de código, o a Proyecto > Agregar elemento existente para agregar archivos de código existentes al proyecto
+//   6. En el futuro, para volver a abrir este proyecto, vaya a Archivo > Abrir > Proyecto y seleccione el archivo .sln
